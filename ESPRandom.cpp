@@ -16,6 +16,12 @@ void ESPRandom::uuid(uint8_t* buffer) {
   buffer[8] = (buffer[8] & 0x3F) | 0x80;
 }
 
+std::vector<uint8_t> ESPRandom::uuid() {
+  std::vector<uint8_t> buffer = std::vector<uint8_t>(16);
+  ESPRandom::uuid(&buffer.front());
+  return buffer;
+}
+
 String ESPRandom::uuidToString(uint8_t* buffer) {
   String uuid_string;
   uuid_string.reserve(36 + 1); // Include NULL
@@ -30,6 +36,14 @@ String ESPRandom::uuidToString(uint8_t* buffer) {
   }
 
   return uuid_string;
+}
+
+String ESPRandom::uuidToString(std::vector<uint8_t>& buffer) {
+  if(buffer.size() != 16) {
+    return String();
+  }
+
+  return uuidToString(&buffer.front());
 }
 
 void ESPRandom::enableRadio() {

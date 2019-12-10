@@ -25,11 +25,27 @@ class ESPRandom {
   static void uuid(uint8_t buffer[16]);
 
   /**
+   * Generate a UUID 
+   * 
+   * \return A vector with the generated UUID
+   */
+  static std::vector<uint8_t> uuid();
+
+  /**
    * Convert a binary UUID into a String
    * 
    * \param buffer A 16 byte array containing a UUID
+   * \return A string containing the canonical textual representation, empty on error
    */
   static String uuidToString(uint8_t buffer[16]);
+
+  /**
+   * Identical to uuidToString(uint8_t*) but with range check
+   * 
+   * \param buffer A 16 byte vector containing a UUID
+   * \return A string containing the canonical textual representation
+   */
+  static String uuidToString(std::vector<uint8_t>& buffer);
 
  private:
   /**
