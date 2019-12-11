@@ -46,6 +46,29 @@ String ESPRandom::uuidToString(std::vector<uint8_t>& buffer) {
   return uuidToString(&buffer.front());
 }
 
+bool ESPRandom::isValidV4Uuid(uint8_t* buffer) {
+  // The 13th hex has to be 4
+  if(buffer[6] >> 4 != 0x4) {
+    return false;
+  }
+  
+  // The 17th hex has to by 0x8, 0x9, 0xA or 0xB
+  uint8_t hex17 = buffer[8] >> 4;
+  if(hex17 != 0x8 && hex17 != 0x9 && hex17 != 0xA && hex17 != 0xB) {
+    return false;
+  }
+
+  return true;
+}
+
+bool ESPRandom::isValidV4Uuid(std::vector<uint8_t>& buffer){
+  if(buffer.size() == 16) {
+    return isValidV4Uuid(&buffer.front());
+  } else {
+    return false;
+  }
+}
+
 void ESPRandom::enableRadio() {
   if (WiFi.getMode() == WIFI_MODE_NULL) {
     WiFi.begin();

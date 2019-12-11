@@ -47,12 +47,34 @@ class ESPRandom {
    */
   static String uuidToString(std::vector<uint8_t>& buffer);
 
+  /**
+   * Checks if the UUID is a valid v4 UUID
+   * 
+   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B
+   * 
+   * \param buffer A 16 byte buffer containing the UUID
+   * \return True if it is valid
+   */
+  static bool isValidV4Uuid(uint8_t* buffer);
+
+  /**
+   * Checks if the UUID is a valid v4 UUID
+   * 
+   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B
+   * 
+   * \param buffer A vector containing the UUID
+   * \return True if it is valid
+   */
+  static bool isValidV4Uuid(std::vector<uint8_t>& buffer);
+
  private:
   /**
-   * The ESP's RNG is only real if the radio is on
+   * The ESP's RNG only receives entropy when the WiFi / Bluetooth radio is on
    * 
    * The esp_random() function will not block but act as a pseudo-RNG if there is not entropy
-   * source. This is problematic if generating UUIDs. See Arduino's built-in random function
+   * source. Tests have shown that even without the radio, dieharder checks will confirm the
+   * generated numbers as random. This is problematic if generating UUIDs. Arduino's built-in
+   * random function is purely a pseudo-RNG and will generate the same numbers upon restart.
    * 
    * \see https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html#_CPPv410esp_randomv
    * \see https://www.arduino.cc/reference/en/language/functions/random-numbers/random/

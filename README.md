@@ -47,13 +47,13 @@ Another reason for creating this library is that the alternatives are covered in
 
 ## Randomness Test
 
-| Test Name | Rewinds | tsamples | psamples | p-value | Assessment |
-|===========|=========|==========|==========|=========|============|
-| diehard_birthdays|     1|       100|     100|0.08369138|  PASSED  |
-| diehard_operm5   |     8|   1000000|     100|0.14173840|  PASSED  |
-|diehard_rank_32x32|   18|     40000|     100|0.00000000|  FAILED  |
-|  diehard_rank_6x8|     22|    100000|     100|0.95923936|  PASSED  |
-| diehard_bitstream|   24|   2097152|     100|0.19399156|  PASSED  |
-|      diehard_opso|   40|   2097152|     100|0.00055960|   WEAK   |
-|      diehard_oqso|   50|   2097152|     100|0.55745812|  PASSED  |
-|       diehard_dna|   55|   2097152|     100|0.08215937|  PASSED  |
+| Test Name        | Rewinds | tsamples | psamples |  p-value  | Assessment |
+|------------------|---------|----------|----------|-----------|------------|
+| diehard_birthdays|        1|       100|       100| 0.08369138|  PASSED    |
+|    diehard_operm5|        8|   1000000|       100| 0.14173840|  PASSED    |
+|diehard_rank_32x32|       18|     40000|       100| 0.00000000|  FAILED    |
+|  diehard_rank_6x8|       22|    100000|       100| 0.95923936|  PASSED    |
+| diehard_bitstream|       24|   2097152|       100| 0.19399156|  PASSED    |
+|      diehard_opso|       40|   2097152|       100| 0.00055960|   WEAK     |
+|      diehard_oqso|       50|   2097152|       100| 0.55745812|  PASSED    |
+|       diehard_dna|       55|   2097152|       100| 0.08215937|  PASSED    |
