@@ -37,7 +37,7 @@ class ESPRandom {
    * \param buffer A 16 byte array containing a UUID
    * \return A string containing the canonical textual representation, empty on error
    */
-  static String uuidToString(uint8_t buffer[16]);
+  static String uuidToString(const uint8_t buffer[16]);
 
   /**
    * Identical to uuidToString(uint8_t*) but with range check
@@ -45,7 +45,7 @@ class ESPRandom {
    * \param buffer A 16 byte vector containing a UUID
    * \return A string containing the canonical textual representation
    */
-  static String uuidToString(std::vector<uint8_t>& buffer);
+  static String uuidToString(const std::vector<uint8_t>& buffer);
 
   /**
    * Checks if the UUID is a valid v4 UUID
@@ -55,7 +55,7 @@ class ESPRandom {
    * \param buffer A 16 byte buffer containing the UUID
    * \return True if it is valid
    */
-  static bool isValidV4Uuid(uint8_t* buffer);
+  static bool isValidV4Uuid(const uint8_t* buffer);
 
   /**
    * Checks if the UUID is a valid v4 UUID
@@ -65,7 +65,7 @@ class ESPRandom {
    * \param buffer A vector containing the UUID
    * \return True if it is valid
    */
-  static bool isValidV4Uuid(std::vector<uint8_t>& buffer);
+  static bool isValidV4Uuid(const std::vector<uint8_t>& buffer);
 
  private:
   /**

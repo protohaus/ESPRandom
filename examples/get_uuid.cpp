@@ -16,6 +16,7 @@ void loop() {
   Serial.println(ESPRandom::uuidToString(uuid_vector));
 
   // Show error checking with invalid UUID
+  // Invalid UUIDs are returned as empty strings
   std::vector<uint8_t> uuid_invalid = {1, 2, 3, 4, 5, 6};
   Serial.println(ESPRandom::uuidToString(uuid_invalid));
 

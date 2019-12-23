@@ -22,7 +22,7 @@ std::vector<uint8_t> ESPRandom::uuid() {
   return buffer;
 }
 
-String ESPRandom::uuidToString(uint8_t* buffer) {
+String ESPRandom::uuidToString(const uint8_t* buffer) {
   String uuid_string;
   uuid_string.reserve(36 + 1); // Include NULL
 
@@ -38,7 +38,7 @@ String ESPRandom::uuidToString(uint8_t* buffer) {
   return uuid_string;
 }
 
-String ESPRandom::uuidToString(std::vector<uint8_t>& buffer) {
+String ESPRandom::uuidToString(const std::vector<uint8_t>& buffer) {
   if(buffer.size() != 16) {
     return String();
   }
@@ -46,7 +46,7 @@ String ESPRandom::uuidToString(std::vector<uint8_t>& buffer) {
   return uuidToString(&buffer.front());
 }
 
-bool ESPRandom::isValidV4Uuid(uint8_t* buffer) {
+bool ESPRandom::isValidV4Uuid(const uint8_t* buffer) {
   // The 13th hex has to be 4
   if(buffer[6] >> 4 != 0x4) {
     return false;
@@ -61,7 +61,7 @@ bool ESPRandom::isValidV4Uuid(uint8_t* buffer) {
   return true;
 }
 
-bool ESPRandom::isValidV4Uuid(std::vector<uint8_t>& buffer){
+bool ESPRandom::isValidV4Uuid(const std::vector<uint8_t>& buffer){
   if(buffer.size() == 16) {
     return isValidV4Uuid(&buffer.front());
   } else {
