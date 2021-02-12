@@ -5,43 +5,82 @@
 #ifndef ESPRandom_h
 #define ESPRandom_h
 
-#include "Arduino.h"
-#include "WiFi.h"
+#include <Arduino.h>
+#include <WiFi.h>
+
+#include <chrono>
 
 class ESPRandom {
  public:
   /**
    * Generate a random number
-   * 
+   *
    * \return Returns a 32 bit random number
    */
   static uint32_t get();
 
   /**
-   * Generate a UUID in the buffer provided
-   * 
+   * Generate a v4 UUID in the buffer provided
+   *
+   * \deprecated Use version specified functions
+   *
    * \param buffer A 16 byte array where the UUID will be saved in
    */
   static void uuid(uint8_t buffer[16]);
 
   /**
-   * Generate a UUID 
+   * Generate a v4 UUID in the buffer provided
+   *
+   * \param buffer A 16 byte array where the UUID will be saved in
+   */
+  static void uuid4(uint8_t buffer[16]);
+
+  /**
+   * Generate a UUID in the buffer provided
    * 
+   * To be compliant, the time has to be set
+   *
+   * \param buffer A 16 byte array where the UUID will be saved in
+   */
+  static void uuid1(uint8_t buffer[16]);
+
+  /**
+   * Generate a v4 UUID
+   *
+   * \deprecated Use uuid function with version number
+   * \see uuid1()
+   * \see uuid4()
+   *
    * \return A vector with the generated UUID
    */
   static std::vector<uint8_t> uuid();
 
   /**
+   * Generate a v1 UUID
+   *
+   * \return A vector with the generated UUID
+   */
+  static std::vector<uint8_t> uuid1();
+
+  /**
+   * Generate a v4 UUID
+   *
+   * \return A vector with the generated UUID
+   */
+  static std::vector<uint8_t> uuid4();
+
+  /**
    * Convert a binary UUID into a String
-   * 
+   *
    * \param buffer A 16 byte array containing a UUID
-   * \return A string containing the canonical textual representation, empty on error
+   * \return A string containing the canonical textual representation, empty on
+   * error
    */
   static String uuidToString(const uint8_t buffer[16]);
 
   /**
    * Identical to uuidToString(uint8_t*) but with range check
-   * 
+   *
    * \param buffer A 16 byte vector containing a UUID
    * \return A string containing the canonical textual representation
    */
@@ -49,9 +88,10 @@ class ESPRandom {
 
   /**
    * Checks if the UUID is a valid v4 UUID
-   * 
-   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B
-   * 
+   *
+   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y
+   * is one of 8, 9, A, or B
+   *
    * \param buffer A 16 byte buffer containing the UUID
    * \return True if it is valid
    */
@@ -59,9 +99,10 @@ class ESPRandom {
 
   /**
    * Checks if the UUID is a valid v4 UUID
-   * 
-   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B
-   * 
+   *
+   * xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y
+   * is one of 8, 9, A, or B
+   *
    * \param buffer A vector containing the UUID
    * \return True if it is valid
    */
@@ -70,16 +111,22 @@ class ESPRandom {
  private:
   /**
    * The ESP's RNG only receives entropy when the WiFi / Bluetooth radio is on
-   * 
-   * The esp_random() function will not block but act as a pseudo-RNG if there is not entropy
-   * source. Tests have shown that even without the radio, dieharder checks will confirm the
-   * generated numbers as random. This is problematic if generating UUIDs. Arduino's built-in
-   * random function is purely a pseudo-RNG and will generate the same numbers upon restart.
-   * 
-   * \see https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html#_CPPv410esp_randomv
-   * \see https://www.arduino.cc/reference/en/language/functions/random-numbers/random/
+   *
+   * The esp_random() function will not block but act as a pseudo-RNG if there
+   * is not entropy source. Tests have shown that even without the radio,
+   * dieharder checks will confirm the generated numbers as random. This is
+   * problematic if generating UUIDs. Arduino's built-in random function is
+   * purely a pseudo-RNG and will generate the same numbers upon restart.
+   *
+   * \see
+   * https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html#_CPPv410esp_randomv
+   * \see
+   * https://www.arduino.cc/reference/en/language/functions/random-numbers/random/
    */
   static void enableRadio();
+
+  /// Counter to create unique v1 uuids
+  static uint16_t clock_sequence_;
 };
 
 #endif

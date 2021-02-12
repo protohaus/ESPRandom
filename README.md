@@ -45,7 +45,7 @@ For random numbers to be generated, the radio (WiFi or Bluetooth) have to be act
 
 Another reason for creating this library is that the alternatives are covered in copy-left licences which significantly restrict their use.
 
-## Randomness Test
+### Randomness Test
 
 | Test Name        | Rewinds | tsamples | psamples |  p-value  | Assessment |
 |------------------|---------|----------|----------|-----------|------------|
@@ -57,3 +57,7 @@ Another reason for creating this library is that the alternatives are covered in
 |      diehard_opso|       40|   2097152|       100| 0.00055960|   WEAK     |
 |      diehard_oqso|       50|   2097152|       100| 0.55745812|  PASSED    |
 |       diehard_dna|       55|   2097152|       100| 0.08215937|  PASSED    |
+
+## Attribution
+
+Derived the UUID v1 generation algorithm from the [stduuid](https://github.com/mariusbancila/stduuid) library.
