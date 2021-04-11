@@ -1,7 +1,7 @@
 [![MIT Licence](https://img.shields.io/github/license/protohaus/ESPRandom?style=flat-square "MIT Licence")](https://en.wikipedia.org/wiki/MIT_License)
 
 # ESPRandom
-Generate random numbers and UUIDs on the ESP8266 and ESP32 using the hardware RNG
+Generate random numbers and UUIDs on the ESP8266 and ESP32 using the hardware RNG. Due to changes in requirements, I have moved to a different approach which has been implemented in the following library: [ESP UUID](https://platformio.org/lib/show/12040/ESP%20UUID). It supports ArduinoJson and std::map. Pull requests will be accepted here, but no active contribution from my side will be made.
 
 ## Examples
 
