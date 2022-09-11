@@ -9,6 +9,7 @@
 #include <WiFi.h>
 
 #include <chrono>
+#include <vector>
 
 class ESPRandom {
  public:
